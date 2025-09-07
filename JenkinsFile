@@ -5,13 +5,23 @@ pipeline {
             steps {
                 echo "Building..."
             }
+             post {
+               always {
+                     mail to: "brennanterreoz@gmail.com",
+                        subject: "Build Status Email",
+                        body: "Build log attached!"
+               }
+            }
         }
-    }
-    post {
-        success {
-            mail to: "brennanterreoz@gmail.com",
-                 subject: "Build Status Email",
-                 body: "Build was successful!"
+        stage("Test") {
+            steps {
+                echo "Testing..."
+            }
+        }
+        stage("Deploy") {
+            steps {
+                echo "Deploying..."
+            }
         }
     }
 }
