@@ -1,31 +1,53 @@
 pipeline {
     agent any
+
     stages {
-        stage("Build") {
+        stage('Build') {
             steps {
-                echo "Building..."
-            }
-             post {
-               always {
-                     mail to: "brennanterreoz@gmail.com",
-                        subject: "Build Status Email",
-                        body: "Build log attached!"
-               }
+                echo 'Compile and package the code using a build automation tool.'
+                echo 'Tool: Maven'
             }
         }
-        stage("Test") {
+
+        stage('Unit & Integration Tests') {
             steps {
-                echo "Testing..."
+                echo 'Run unit tests and integration tests to validate functionality.'
+                echo 'Tools: JUnit, Maven Surefire/Failsafe'
             }
         }
-        stage("Deploy") {
+
+        stage('Code Analysis') {
             steps {
-                echo "Deploying..."
+                echo 'Analyze code to ensure it meets industry standards.'
+                echo 'Tool: SonarQube'
             }
         }
-        stage("Complete") {
+
+        stage('Security Scan') {
             steps {
-                echo "Completed..."
+                echo 'Perform a security scan to identify vulnerabilities.'
+                echo 'Tool: OWASP Dependency-Check'
+            }
+        }
+
+        stage('Deploy to Staging') {
+            steps {
+                echo 'Deploy the application to a staging server.'
+                echo 'Tool: Ansible'
+            }
+        }
+
+        stage('Integration Tests on Staging') {
+            steps {
+                echo 'Run integration tests in the staging environment.'
+                echo 'Tool: Newman (Postman CLI)'
+            }
+        }
+
+        stage('Deploy to Production') {
+            steps {
+                echo 'Deploy the application to the production server.'
+                echo 'Tool: AWS CodeDeploy'
             }
         }
     }
