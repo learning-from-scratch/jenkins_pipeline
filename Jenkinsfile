@@ -40,7 +40,7 @@ pipeline {
         stage('Integration Tests on Staging') {
             steps {
                 echo 'Run integration tests in the staging environment.'
-                echo 'Tool: Newman (Postman CLI)'
+                echo 'Tool: Newman (Postman CLI )'
             }
         }
 
